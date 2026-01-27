@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "dhTsIySj91Y=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Leena\\source\\repos\\CalenderApp\\CalenderApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Leena\\.nuget\\packages\\docfx.console\\2.59.4\\docfx.console.2.59.4.nupkg.sha512"
+  ],
+  "logs": []
+}

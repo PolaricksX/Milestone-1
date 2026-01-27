@@ -1,0 +1,14 @@
+C:\Users\Leena\source\repos\CalenderApp\bin\Debug\net8.0\CalenderApp.exe
+C:\Users\Leena\source\repos\CalenderApp\bin\Debug\net8.0\CalenderApp.deps.json
+C:\Users\Leena\source\repos\CalenderApp\bin\Debug\net8.0\CalenderApp.runtimeconfig.json
+C:\Users\Leena\source\repos\CalenderApp\bin\Debug\net8.0\CalenderApp.dll
+C:\Users\Leena\source\repos\CalenderApp\bin\Debug\net8.0\CalenderApp.pdb
+C:\Users\Leena\source\repos\CalenderApp\obj\Debug\net8.0\CalenderApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Leena\source\repos\CalenderApp\obj\Debug\net8.0\CalenderApp.AssemblyInfoInputs.cache
+C:\Users\Leena\source\repos\CalenderApp\obj\Debug\net8.0\CalenderApp.AssemblyInfo.cs
+C:\Users\Leena\source\repos\CalenderApp\obj\Debug\net8.0\CalenderApp.csproj.CoreCompileInputs.cache
+C:\Users\Leena\source\repos\CalenderApp\obj\Debug\net8.0\CalenderApp.dll
+C:\Users\Leena\source\repos\CalenderApp\obj\Debug\net8.0\refint\CalenderApp.dll
+C:\Users\Leena\source\repos\CalenderApp\obj\Debug\net8.0\CalenderApp.pdb
+C:\Users\Leena\source\repos\CalenderApp\obj\Debug\net8.0\CalenderApp.genruntimeconfig.cache
+C:\Users\Leena\source\repos\CalenderApp\obj\Debug\net8.0\ref\CalenderApp.dll
