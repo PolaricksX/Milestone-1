@@ -181,7 +181,7 @@ namespace Calendar
             Start = Start ?? new DateTime(1900, 1, 1);
             End = End ?? new DateTime(2500, 1, 1);
 
-            var query =  from c in _categories.List()
+            var query = from c in _categories.List()
                         join e in _events.List() on c.Id equals e.Category
                         where e.StartDateTime >= Start && e.StartDateTime <= End
                         select new { CatId = c.Id, EventId = e.Id, e.StartDateTime, Category = c.Description, e.Details, e.DurationInMinutes };
@@ -222,6 +222,15 @@ namespace Calendar
         // returns a list of CalendarItemsByMonth which is 
         // "year/month", list of calendar items, and totalBusyTime for that month
         // ============================================================================
+
+        /// <summary>
+        /// Retrieves All Calendar entries for each month and returns a summary of the events for the passed in month.
+        /// </summary>
+        /// <param name="Start"></param>
+        /// <param name="End"></param>
+        /// <param name="FilterFlag"></param>
+        /// <param name="CategoryID"></param>
+        /// <returns></returns>
         public List<CalendarItemsByMonth> GetCalendarItemsByMonth(DateTime? Start, DateTime? End, bool FilterFlag, int CategoryID)
         {
             // -----------------------------------------------------------------------
@@ -321,7 +330,28 @@ namespace Calendar
         //             for each category for which there is an event in ANY month:
         //             "category", the total busy time for that category for all the months
         // ============================================================================
-        public List<Dictionary<string,object>> GetCalendarDictionaryByCategoryAndMonth(DateTime? Start, DateTime? End, bool FilterFlag, int CategoryID)
+
+        /// <summary>
+        ///  Gets a list of dictionary by Grouping all events by Category and Month one per month and one per category and returns a summary
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// HomeCalendar homeCalendar = new HomeCalendar(inFile);
+        /// Events = homeCalendar.GetCalendarDictionaryByCategoryAndMonth(null, null, false, 9);
+        /// 
+        /// Events = homeCalendar.GetCalendarDictionaryByCategoryAndMonth(null, null, true, 9);
+        /// 
+        /// Events = homeCalendar.GetCalendarDictionaryByCategoryAndMonth(new DateTime(2025,1,1), new DateTime(2025,12,31), false, 5)
+        /// ]]>
+        /// </code>
+        /// </example>
+        /// <param name="Start">The Start Date by YYYY/MM/DD.</param>
+        /// <param name="End">The End Date by YYYY/MM/DD</param>
+        /// <param name="FilterFlag">A boolean that filters by category if set to true.</param>
+        /// <param name="CategoryID">An integer that represents an already predefined category</param>
+        /// <returns>Summary</returns>
+        public List<Dictionary<string, object>> GetCalendarDictionaryByCategoryAndMonth(DateTime? Start, DateTime? End, bool FilterFlag, int CategoryID)
         {
             // -----------------------------------------------------------------------
             // get all items by month 
