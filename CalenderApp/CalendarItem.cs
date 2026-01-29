@@ -22,16 +22,9 @@ namespace Calendar
     /// <example>
     /// <code>
     /// <![CDATA[
-    /// CalendarItem = new CalendarItem
-    /// {
-    ///     categoryId = 2,
-    ///     eventID = 2,
-    ///     StartDateTime = new DateTime(2026, 1, 26),
-    ///     category = "fun"
-    ///     shortDescription "Went to the beach",
-    ///     durationInMinutes = 73
-    ///     busyTime = 73
-    /// }
+    /// CalendarItem = new CalendarItem(2,2,DateTime(2026,1,26),"Fun","Went to the beach",73,73)
+    /// 
+    ///
     /// ]]>
     /// </code>
     /// </example>
@@ -42,10 +35,11 @@ namespace Calendar
         /// </summary>
         /// <value> An integer value that is used to determined an already predefined category.</value>
         public int CategoryID { get; set; }
+
         /// <summary>
         /// Gets or Sets the EventId number of a calendar entry
-        /// </summary
-        /// <value>An integer value that is used to an already determined an already predefined event.</value>
+        /// </summary>
+        /// <value> An integer value that is used to an already determined an already predefined event. </value>
         public int EventID { get; set; }
         /// <summary>
         /// Gets or Sets the Date of a calendar entry.

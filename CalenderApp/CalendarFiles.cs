@@ -16,6 +16,19 @@ namespace Calendar
     /// <summary>
     /// CalendarFiles class is used to manage the files used in the Calendar project
     /// </summary>
+    /// <example>
+    /// <code>
+    /// <![CDATA[
+    /// CalenderFiles File = New CalenderFiles()
+    /// 
+    /// String FilePath = ".\Users\TestUser\AppData\Local\Calendar"
+    /// String FileName = "calendar.txt"
+    ///
+    /// File.VerifyReadFromFileName(FilePath,FileName)
+    /// File.VerifyWriteFromFileName(FilePath,FileName)
+    /// ]]>
+    /// </code>
+    /// </example>
     public class CalendarFiles
     {
         private static String DefaultSavePath = @"Calendar\";
@@ -26,6 +39,35 @@ namespace Calendar
         // is it readable?
         // throws System.IO.FileNotFoundException if file does not exist
         // ====================================================================
+
+        /// <summary>
+        /// Verfies if the path to the file exists
+        /// </summary>
+        /// <param name="FilePath">Relative Path to the file</param>
+        /// <param name="DefaultFileName">The Name of the file</param>
+        /// <returns>Returns FilePah if Valid.</returns>
+        /// <exception cref="FileNotFoundException">Throws when the filepath does not exist.</exception>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// String nullPath = null
+        /// String fileName = "Calendar.txt"
+        /// 
+        /// CalenderFiles File = New CalenderFiles()
+        /// 
+        /// String returnPath = File.VerifyReadFromFileName(NullPath,FileName)
+        /// Console.WriteLine(ReturnPath) = "%USERPROFILE%\\AppData\\Local\\" "Calendar\\" "Calendar.txt"
+        /// 
+        /// String fakePath =  ".\This\Drive\Does\Not\Exist"
+        /// returnPath = File.VerifyReadFromFileName(FakePath,fileName)
+        /// returnPath = FileNotFoundException "ReadFromFileException: FilePath (" + FakePath + ") Does not exist"
+        /// 
+        /// string realPath = "".\Users\TestUser\AppData\Local\Calendar""
+        /// returnPath = File.VerifyReadFromFileName
+        /// 
+        /// ]]>
+        /// </code>
+        /// </example>
         public static String VerifyReadFromFileName(String? FilePath, String DefaultFileName)
         {
 

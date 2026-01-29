@@ -23,16 +23,7 @@ namespace Calendar
     /// <code>
     /// <![CDATA[
     /// 
-    /// 
-    /// Event Event = New Event
-    /// {
-    ///     Id = 1;
-    ///     StartDateTime = new DateTime(2026,2,27);
-    ///     DurationInMinutes = 90;
-    ///     Details = "Went to the WaterPark";
-    ///     Category = 5
-    ///     
-    /// }
+    /// Event Event = New Event(1,New DateTime(2026,2,27),90,"Went to the WaterPark",5)
     /// 
     /// Event.Id = 1
     /// Event.StartDateTime = "2026,2,27"
@@ -102,15 +93,6 @@ namespace Calendar
         /// <example>
         /// <code>
         /// <![CDATA[
-        /// Event Event = New Event
-        /// {
-        ///     Id = 1;
-        ///     StartDateTime = new DateTime(2026,2,27);
-        ///     DurationInMinutes = 90;
-        ///     Details = "Went to the WaterPark";
-        ///     Category = 5
-        ///     
-        /// }
         /// 
         /// Event Event = New Event(1,New DateTime(2026,2,27),90,"Went to the WaterPark",5)
         /// 

@@ -194,7 +194,7 @@ namespace Calendar
                             case "DurationInMinutes":
                                 DurationInMinutes = Double.Parse(info.InnerText);
                                 break;
-                            case "Items":
+                            case "Details":
                                 description = info.InnerText;
                                 break;
                             case "Category":
