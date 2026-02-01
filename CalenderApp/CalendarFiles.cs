@@ -10,6 +10,7 @@ using System.IO;
 // * Released under the GNU General Public License
 // ============================================================================
 
+
 namespace Calendar
 {
 
@@ -63,7 +64,9 @@ namespace Calendar
         /// returnPath = FileNotFoundException "ReadFromFileException: FilePath (" + FakePath + ") Does not exist"
         /// 
         /// string realPath = "".\Users\TestUser\AppData\Local\Calendar""
-        /// returnPath = File.VerifyReadFromFileName
+        /// returnPath = File.VerifyReadFromFileName(realPath,fileName)
+        /// 
+        /// Console.WriteLine(realPath) = "".\Users\TestUser\AppData\Local\Calendar""
         /// 
         /// ]]>
         /// </code>
@@ -99,6 +102,39 @@ namespace Calendar
         // is it writable
         // ====================================================================
 
+        /// <summary>
+        /// Checks if the file is writable 
+        /// </summary>
+        /// <param name="FilePath">Relative Path to the file Allows Nulls</param>
+        /// <param name="DefaultFileName">Name of the file</param>
+        /// <returns>Returns the filepath</returns>
+        /// <exception cref="Exception">Throws when the specified directory isn't valid or The file isn't capable to be edited.</exception>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// string nullPath = null
+        /// string defaultFileName = calender.txt
+        /// 
+        /// 
+        /// 
+        /// CalenderFiles File = New CalenderFiles()
+        /// 
+        /// Path = File.VeriyWriteToFileName(nullPath,defaultFileName)
+        /// Console.WriteLine(Path) = "%USERPROFILE%\\AppData\\Local\\"
+        /// 
+        /// string fakePath = ".\This\Drive\Does\Not\Exist"
+        /// Path = File.VerifyWriteToFileName()
+        /// Path = Throw Exception ("SaveToFileException: FilePath("%USERPROFILE%\\AppData\\Local\\")
+        /// 
+        /// 
+        /// string realPath = "".\Users\TestUser\AppData\Local\Calendar""
+        /// returnPath = File.VerifyWriteFromFileName(realPath,fileName)
+        /// 
+        /// Console.WriteLine(realPath) = "".\Users\TestUser\AppData\Local\Calendar""
+        /// 
+        /// ]]>
+        /// </code>
+        /// </example>
         public static String VerifyWriteToFileName(String? FilePath, String DefaultFileName)
         {
             // ---------------------------------------------------------------

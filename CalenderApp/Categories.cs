@@ -17,6 +17,20 @@ namespace Calendar
     //        - Read / write to file
     //        - etc
     // ====================================================================
+
+    /// <summary>
+    /// Creates a List of category items for reading/writing
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// <![CDATA[
+    /// 
+    /// Categories categories = new Categories()
+    /// 
+    /// 
+    /// ]]>
+    /// </code>
+    /// </example>
     public class Categories
     {
         private static String DefaultFileName = "calendarCategories.txt";
@@ -27,12 +41,36 @@ namespace Calendar
         // ====================================================================
         // Properties
         // ====================================================================
+
+        /// <summary>
+        /// Gets The name of the file
+        /// </summary>
+        /// <value>
+        /// stores the name of the file
+        /// </value>
         public String? FileName { get { return _FileName; } }
+        /// <summary>
+        /// Gets the Directory of the file
+        /// </summary>
+        /// <value>
+        /// Stores the directory name for the file
+        /// </value>
         public String? DirName { get { return _DirName; } }
 
         // ====================================================================
         // Constructor
         // ====================================================================
+
+        /// <summary>
+        /// Creates an instance of categories(List)
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// Categories categories = new Categories()
+        /// ]]>
+        /// </code>
+        /// </example>
         public Categories()
         {
             SetCategoriesToDefaults();
@@ -41,6 +79,27 @@ namespace Calendar
         // ====================================================================
         // get a specific category from the list where the id is the one specified
         // ====================================================================
+
+        /// <summary>
+        /// Retrieves the value at the position of the passed in index.
+        /// </summary>
+        /// <param name="i">the index to retrieve the value at.</param>
+        /// <returns>returns a category</returns>
+        /// <exception cref="Exception">Throws When the value at the index is null</exception>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// Categories categories = new Categories()
+        /// 
+        /// Category type = categories.GetCategoryFromId(5)
+        /// Console.Writeline(type.ToString)
+        /// 
+        /// Category type = categories.GetCategoryFromId(100)
+        /// type = Throw Exception("Cannot find category with id" i.ToString())
+        /// 
+        /// ]]>
+        /// </code>
+        /// </example>
         public Category GetCategoryFromId(int i)
         {
             Category? c = _Categories.Find(x => x.Id == i);
@@ -57,6 +116,22 @@ namespace Calendar
         // Throws System.IO.FileNotFoundException if file does not exist
         // Throws System.Exception if cannot read the file correctly (parsing XML)
         // ====================================================================
+
+        /// <summary>
+        /// Populates the file with categories if the Filepath is not specified.
+        /// </summary>
+        /// <param name="filepath">Filepath can be null</param>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// Categories categories = new Categories()
+        /// 
+        /// filePath = null
+        /// 
+        /// categories.ReadFromFile(filePath)
+        /// ]]>
+        /// </code>
+        /// </example>
         public void ReadFromFile(String? filepath = null)
         {
 
@@ -89,6 +164,20 @@ namespace Calendar
         // save to a file
         // if filepath is not specified, read/save in AppData file
         // ====================================================================
+        /// <summary>
+        /// Saves the file To a default Path if not specified.
+        /// </summary>
+        /// <param name="filepath">The path of the file</param>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// Categories categories = new Categories()
+        /// 
+        /// filePath = null
+        /// categories.SaveToFile(filePath)
+        /// ]]>
+        /// </code>
+        /// </example>
         public void SaveToFile(String? filepath = null)
         {
             // ---------------------------------------------------------------
@@ -125,6 +214,16 @@ namespace Calendar
         // ====================================================================
         // set categories to default
         // ====================================================================
+        /// <summary>
+        /// Fill in Category data for a newly created instance
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// Categories categories = new Categories()
+        /// ]]>
+        /// </code>
+        /// </example>
         public void SetCategoriesToDefaults()
         {
             // ---------------------------------------------------------------
@@ -149,11 +248,43 @@ namespace Calendar
         // ====================================================================
         // Add category
         // ====================================================================
+        /// <summary>
+        /// Adds a Category to a existing List
+        /// </summary>
+        /// <param name="category">Category object to addd to the list</param>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// Categories categories = New Categories()
+        /// 
+        /// Category category = new Category(1,"work stuff",Event)
+        /// 
+        /// categories.Add(category)
+        /// ]]>
+        /// </code>
+        /// </example>
         private void Add(Category category)
         {
             _Categories.Add(category);
         }
-
+        /// <summary>
+        /// Adds new CategoryType with description
+        /// </summary>
+        /// <param name="desc">Description for newly created type</param>
+        /// <param name="type">the new type of category</param>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// Categories categories = New Categories()
+        /// 
+        /// Category category = new Category
+        /// 
+        /// string desc = "Relaxation"
+        /// 
+        /// categories.add(desc,category.CategoryType Relax)
+        /// ]]>
+        /// </code>
+        /// </example>
         public void Add(String desc, Category.CategoryType type)
         {
             int new_num = 1;
@@ -168,6 +299,19 @@ namespace Calendar
         // ====================================================================
         // Delete category
         // ====================================================================
+        /// <summary>
+        /// Deletes a category from the list
+        /// </summary>
+        /// <param name="Id">the index at which to delete the category from</param>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// Categories categories = New Categories()
+        /// 
+        /// categories.Delete(1)
+        /// ]]>
+        /// </code>
+        /// </example>
         public void Delete(int Id)
         {
             int i = _Categories.FindIndex(x => x.Id == Id);
@@ -179,6 +323,19 @@ namespace Calendar
         // Note:  make new copy of list, so user cannot modify what is part of
         //        this instance
         // ====================================================================
+        /// <summary>
+        /// Creates an list of categories
+        /// </summary>
+        /// <returns>returns a new list with category data</returns>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// Categories categories = new Categories
+        /// 
+        /// categories = categories.List()
+        /// ]]>
+        /// </code>
+        /// </example>
         public List<Category> List()
         {
             List<Category> newList = new List<Category>();
