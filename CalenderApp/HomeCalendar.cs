@@ -18,6 +18,24 @@ namespace Calendar
     //        - etc
     // ====================================================================
 
+
+    /// <summary>
+    /// Creates a calender(dictionary) of events grouped by categories.
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// <![CDATA[
+    /// fileName = calenderfile.txt
+    /// 
+    /// HomeCalendar homeCalendar = new HomeCalendar()
+    /// HomeCalendar homeCalendar = new HomeCalendar(fileName)
+    /// 
+    /// homeCalendar.FileName
+    /// homeCalendar.DirName
+    /// homeCalendar.PathName
+    /// ]]>
+    /// </code>
+    /// </example>
     public class HomeCalendar
     {
         private string? _FileName;
@@ -30,8 +48,28 @@ namespace Calendar
         // ===================================================================
 
         // Properties (location of files etc)
+        
+        /// <summary>
+        /// Gets the name of the file
+        /// </summary>
+        /// <value>
+        /// stores the name of the file
+        /// </value>
         public String? FileName { get { return _FileName; } }
+        /// <summary>
+        /// gets the name of the directory
+        /// </summary>
+        /// <value>
+        /// stores the name of the directory
+        /// </value>
         public String? DirName { get { return _DirName; } }
+
+        /// <summary>
+        /// Gets the name of the path if File name and dir name is null return null
+        /// </summary>
+        /// <value>
+        /// stores the name of the path.
+        /// </value>
         public String? PathName
         {
             get
@@ -48,12 +86,29 @@ namespace Calendar
         }
 
         // Properties (categories and events object)
+        /// <summary>
+        /// Gets the list of categories
+        /// </summary>
+        /// <value>
+        /// stores a list of category object
+        /// </value>
         public Categories categories { get { return _categories; } }
+
+        /// <summary>
+        /// Gets a list of events
+        /// </summary>
+        /// <value>
+        /// stores a list of event objects
+        /// </value>
         public Events events { get { return _events; } }
 
         // -------------------------------------------------------------------
         // Constructor (new... default categories, no events)
         // -------------------------------------------------------------------
+
+        /// <summary>
+        /// Creates an instance of HomeCalendar there is no calendar.
+        /// </summary>
         public HomeCalendar()
         {
             _categories = new Categories();
@@ -63,6 +118,20 @@ namespace Calendar
         // -------------------------------------------------------------------
         // Constructor (existing calendar ... must specify file)
         // -------------------------------------------------------------------
+        /// <summary>
+        /// Creates an instance of HomeCalendar using a file
+        /// </summary>
+        /// <param name="calendarFileName">the file to use to create a HomeCalendar Object</param>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// fileName = calenderfile.txt
+        /// 
+        /// HomeCalendar homeCalendar = new HomeCalendar(fileName)
+        ///
+        /// ]]>
+        /// </code>
+        /// </example>
         public HomeCalendar(String calendarFileName)
         {
             _categories = new Categories();
@@ -75,6 +144,24 @@ namespace Calendar
         // Read
         // Throws Exception if any problem reading this file
         // ---------------------------------------------------------------
+
+        /// <summary>
+        /// Reads a CalendarFile and creates Categories and events.
+        /// </summary>
+        /// <param name="calendarFileName">The name of the file can be null</param>
+        /// <exception cref="Exception">Throws when the info cannot be read</exception>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// 
+        /// fileName = calenderfile.txt
+        /// 
+        /// HomeCalendar homeCalendar = new HomeCalendar(fileName)
+        /// 
+        /// homeCalendar.ReadFromFile()
+        /// ]]>
+        /// </code>
+        /// </example>>
         public void ReadFromFile(String? calendarFileName)
         {
             // ---------------------------------------------------------------
@@ -122,6 +209,22 @@ namespace Calendar
         //  filepath # a file containing the names of the events and categories files.
         //  Throws exception if we cannot write to that file (ex: invalid dir, wrong permissions)
         // ====================================================================
+
+        /// <summary>
+        /// Saves to a file in a desired directory.
+        /// </summary>
+        /// <param name="filepath">The name of the filepath</param>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// fileName = calenderfile.txt
+        /// 
+        /// HomeCalendar homeCalendar = new HomeCalendar(fileName)
+        /// 
+        /// homeCalendar.SaveToFile(./2026/HomeCalendar)
+        /// ]]>
+        /// </code>
+        /// </example>
         public void SaveToFile(String filepath)
         {
 
@@ -173,6 +276,66 @@ namespace Calendar
         // ============================================================================
         // Get all events list
         // ============================================================================
+
+        /// <summary>
+        /// Gets Calendar items from the list
+        /// </summary>
+        /// <param name="Start">The start date</param>
+        /// <param name="End">The End date</param>
+        /// <param name="FilterFlag">if true filters Calendar items by Category, otherwise false</param>
+        /// <param name="CategoryID">the Category in which to filter the CalendarItems</param>
+        /// <returns>Returns a summary of all CalendarItems</returns>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// HomeCalendar homeCalendar = new HomeCalendar(inFile);
+        /// 
+        /// homeCalendar.GetCalendarItems(null,null,false,9);
+        /// Cat_ID     Event_ID        StartDateTime             ShortDescription               TotalBusyTime        DurationInMinutes
+        /// ------------------------------------------------------------------------------------------------------------------------
+        /// 3          1               1/10/2018 10:00:00 AM     App Dev Homework               40                   40
+        /// 2          8               1/11/2018 10:15:00 AM     Sprint retrospective           100                  60
+        /// 2          5               1/11/2018 7:30:00 PM      staff meeting                  115                  15
+        /// 2          9               1/11/2019 9:30:00 AM      training                       175                  60
+        /// 8          6               1/1/2020 12:00:00 AM      New Year's                     1615                 1440
+        /// 9          2               1/9/2020 12:00:00 AM      Honolulu                       3055                 1440
+        /// 9          3               1/10/2020 12:00:00 AM     Honolulu                       4495                 1440
+        /// 11         7               1/12/2020 12:00:00 AM     Wendy's birthday               5935                 1440
+        /// 7          4               1/20/2020 11:00:00 AM     On call security               6115                 1
+        ///
+        /// int filterCategory = 2;
+        /// homeCalendar.GetCalendarItems(null, null, true, filterCategory);
+        /// 
+        /// Cat_ID     Event_ID        StartDateTime             ShortDescription               TotalBusyTime        DurationInMinutes
+        /// ------------------------------------------------------------------------------------------------------------------------
+        /// 2          8               1/11/2018 10:15:00 AM     Sprint retrospective           60                   60
+        /// 2          5               1/11/2018 7:30:00 PM      staff meeting                  75                   15
+        /// 2          9               1/11/2019 9:30:00 AM      training                       135                  60
+        /// 
+        /// homeCalendar.GetCalendarItems(new DateTime(2018, 1, 1), new DateTime(2018, 12, 31), false, 0);
+        /// 
+        /// Cat_ID     Event_ID        StartDateTime             ShortDescription               TotalBusyTime        DurationInMinutes
+        /// ------------------------------------------------------------------------------------------------------------------------
+        /// 3          1               1/10/2018 10:00:00 AM     App Dev Homework               40                   40
+        /// 2          8               1/11/2018 10:15:00 AM     Sprint retrospective           100                  60
+        /// 2          5               1/11/2018 7:30:00 PM      staff meeting                  115                  15
+        /// 
+        /// homeCalendar.GetCalendarItems(null, null,  true, 2);
+        /// 
+        /// Cat_ID     Event_ID        StartDateTime             ShortDescription               TotalBusyTime        DurationInMinutes
+        /// ------------------------------------------------------------------------------------------------------------------------
+        /// 2          8               1/11/2018 10:15:00 AM     Sprint retrospective           60                   60
+        /// 2          5               1/11/2018 7:30:00 PM      staff meeting                  75                   15
+        /// 2          9               1/11/2019 9:30:00 AM      training                       135                  60
+        /// 
+        /// homeCalendar.GetCalendarItems(new DateTime(2018, 1, 1), new DateTime(2018, 12, 31), true, 3);
+        /// 
+        /// Cat_ID     Event_ID        StartDateTime             ShortDescription               TotalBusyTime        DurationInMinutes
+        /// ------------------------------------------------------------------------------------------------------------------------
+        /// 3          1               1/10/2018 10:00:00 AM     App Dev Homework               40                   40
+        /// ]]>
+        /// </code>
+        /// </example>
         public List<CalendarItem> GetCalendarItems(DateTime? Start, DateTime? End, bool FilterFlag, int CategoryID)
         {
             // ------------------------------------------------------------------------
@@ -224,13 +387,62 @@ namespace Calendar
         // ============================================================================
 
         /// <summary>
-        /// Retrieves All Calendar entries for each month and returns a summary of the events for the passed in month.
+        /// Retrieves All Calendar Items by grouping each calendar entry by month
         /// </summary>
-        /// <param name="Start"></param>
-        /// <param name="End"></param>
-        /// <param name="FilterFlag"></param>
-        /// <param name="CategoryID"></param>
-        /// <returns></returns>
+        /// <param name="Start">The Start date</param>
+        /// <param name="End">The End Date</param>
+        /// <param name="FilterFlag">If true filter the Calendar item by Category otherwise false</param>
+        /// <param name="CategoryID">The category to filter by</param>
+        /// <returns>returns a summary</returns>
+        /// <exmaple>
+        /// <code>
+        /// <![CDATA[
+        /// HomeCalendar homeCalendar = new HomeCalendar(inFile)
+        /// 
+        /// homeCalendar.GetCalendarItemsByMonth(null, null, false, 9);
+        /// 
+        /// /// Cat_ID     Event_ID        StartDateTime             ShortDescription               TotalBusyTime        DurationInMinutes
+        /// ------------------------------------------------------------------------------------------------------------------------
+        /// 3          1               1/10/2018 10:00:00 AM     App Dev Homework               40                   40
+        /// 2          8               1/11/2018 10:15:00 AM     Sprint retrospective           100                  60
+        /// 2          5               1/11/2018 7:30:00 PM      staff meeting                  115                  15
+        /// 2          9               1/11/2019 9:30:00 AM      training                       175                  60
+        /// 8          6               1/1/2020 12:00:00 AM      New Year's                     1615                 1440
+        /// 9          2               1/9/2020 12:00:00 AM      Honolulu                       3055                 1440
+        /// 9          3               1/10/2020 12:00:00 AM     Honolulu                       4495                 1440
+        /// 11         7               1/12/2020 12:00:00 AM     Wendy's birthday               5935                 1440
+        /// 7          4               1/20/2020 11:00:00 AM     On call security               6115                 180
+        /// 
+        /// homeCalendar.GetCalendarItemsByMonth(null, null, true, 9);
+        /// 
+        /// Cat_ID     Event_ID        StartDateTime             ShortDescription               TotalBusyTime        DurationInMinutes
+        /// ------------------------------------------------------------------------------------------------------------------------
+        /// 9          2               1/9/2020 12:00:00 AM      Honolulu                         1440                 1440
+        /// 9          3               1/10/2020 12:00:00 AM     Honolulu                       2880                 1440
+        /// 
+        /// homeCalendar.GetCalendarItemsByMonth(new DateTime(2020, 1, 1), new DateTime(2020, 12, 31)
+        /// 
+        /// 
+        /// Cat_ID     Event_ID        StartDateTime             ShortDescription               TotalBusyTime        DurationInMinutes
+        /// ------------------------------------------------------------------------------------------------------------------------
+        /// 8          6               1/1/2020 12:00:00 AM      New Year's                     1440                 1440
+        /// 9          2               1/9/2020 12:00:00 AM      Honolulu                       2880                 1440
+        /// 9          3               1/10/2020 12:00:00 AM     Honolulu                       4320                 1440
+        /// 11         7               1/12/2020 12:00:00 AM     Wendy's birthday               5760                 1440
+        /// 7          4               1/20/2020 11:00:00 AM     On call security               5940                 180
+        /// 
+        /// homeCalendar.GetCalendarItemsByMonth(new DateTime(2018, 1, 1), new DateTime(2018, 12, 31), false, 9);
+        /// 
+        /// 
+        /// Cat_ID     Event_ID        StartDateTime             ShortDescription               TotalBusyTime        DurationInMinutes
+        /// ------------------------------------------------------------------------------------------------------------------------
+        /// 3          1               1/10/2018 10:00:00 AM     App Dev Homework               40                   40             
+        /// 2          8               1/11/2018 10:15:00 AM     Sprint retrospective           100                  60             
+        /// 2          5               1/11/2018 7:30:00 PM      staff meeting                  115                  15
+        /// 
+        /// ]]>
+        /// </code>
+        /// </exmaple>
         public List<CalendarItemsByMonth> GetCalendarItemsByMonth(DateTime? Start, DateTime? End, bool FilterFlag, int CategoryID)
         {
             // -----------------------------------------------------------------------
@@ -273,6 +485,60 @@ namespace Calendar
         // ============================================================================
         // Group all events by category (ordered by category name)
         // ============================================================================
+        /// <summary>
+        /// Gets a list of dictionary by grouping all calendar items by Category
+        /// </summary>
+        /// <param name="Start">The Start Date</param>
+        /// <param name="End">The end date</param>
+        /// <param name="FilterFlag">if true filter all calendar items by Category otherwise false</param>
+        /// <param name="CategoryID">The Category to filter the Calendar Items by</param>
+        /// <returns>Returns a summary of all calendar items.</returns>
+        /// <exmaple>
+        /// <code>
+        /// <![CDATA[
+        /// HomeCalendar homeCalendar = new HomeCalendar(inFile)
+        /// 
+        /// homeCalendar.GetCalendarItemsByCategory(null, null, false, 9);
+        /// 
+        /// 
+        /// Cat_ID     Event_ID        StartDateTime             ShortDescription               TotalBusyTime        DurationInMinutes
+        /// ------------------------------------------------------------------------------------------------------------------------
+        /// 11         7               1/12/2020 12:00:00 AM     Wendy's birthday               5935                 1440           
+        /// 8          6               1/1/2020 12:00:00 AM      New Year's                     1615                 1440           
+        /// 3          1               1/10/2018 10:00:00 AM     App Dev Homework               40                   40             
+        /// 7          4               1/20/2020 11:00:00 AM     On call security               6115                 180            
+        /// 9          2               1/9/2020 12:00:00 AM      Honolulu                       3055                 1440           
+        /// 9          3               1/10/2020 12:00:00 AM     Honolulu                       4495                 1440           
+        /// 2          8               1/11/2018 10:15:00 AM     Sprint retrospective           100                  60             
+        /// 2          5
+        /// 
+        /// homeCalendar.GetCalendarItemsByMonth(null, null, true, 11);
+        /// 
+        /// 
+        /// Cat_ID     Event_ID        StartDateTime             ShortDescription               TotalBusyTime        DurationInMinutes
+        /// ------------------------------------------------------------------------------------------------------------------------
+        /// 11         7               1/12/2020 12:00:00 AM     Wendy's birthday               1440                 1440
+        /// 
+        /// homeCalendar.GetCalendarItemsByCategory(new DateTime(2018, 1, 1), new DateTime(2018, 12, 31), true, 2);
+        /// 
+        ///
+        /// Cat_ID     Event_ID        StartDateTime             ShortDescription               TotalBusyTime        DurationInMinutes
+        /// ------------------------------------------------------------------------------------------------------------------------
+        /// 2          8               1/11/2018 10:15:00 AM     Sprint retrospective           60                   60             
+        /// 2          5               1/11/2018 7:30:00 PM      staff meeting                  75                   15
+        /// 
+        /// homeCalendar.GetCalendarItemsByCategory(new DateTime(2018, 1, 1), new DateTime(2018, 12, 31), false, 9);
+        /// 
+        /// /// 
+        /// Cat_ID     Event_ID        StartDateTime             ShortDescription               TotalBusyTime        DurationInMinutes
+        /// ------------------------------------------------------------------------------------------------------------------------
+        /// 3          1               1/10/2018 10:00:00 AM     App Dev Homework               40                   40             
+        /// 2          8               1/11/2018 10:15:00 AM     Sprint retrospective           100                  60             
+        /// 2          5               1/11/2018 7:30:00 PM      staff meeting                  115                  15
+        /// 
+        /// ]]>
+        /// </code>
+        /// </exmaple>
         public List<CalendarItemsByCategory> GetCalendarItemsByCategory(DateTime? Start, DateTime? End, bool FilterFlag, int CategoryID)
         {
             // -----------------------------------------------------------------------
@@ -337,19 +603,61 @@ namespace Calendar
         /// <example>
         /// <code>
         /// <![CDATA[
-        /// HomeCalendar homeCalendar = new HomeCalendar(inFile);
+        ///  
         /// Events = homeCalendar.GetCalendarDictionaryByCategoryAndMonth(null, null, false, 9);
+        /// 
+        /// /// Month: 2018/01
+        ///   TotalBusyTime: 115 mins
+        ///   Fun: 40 mins
+        ///   Work: 75 mins
+        /// Month: 2019/01
+        ///   TotalBusyTime: 60 mins
+        ///   Work: 60 mins
+        /// Month: 2020/01
+        ///   TotalBusyTime: 5940 mins
+        ///   Birthdays: 1440 mins
+        ///   Canadian Holidays: 1440 mins
+        ///   On call: 180 mins
+        ///   Vacation: 2880 mins
+        /// Month: TOTALS
+        ///   Work: 135 mins
+        ///   Fun: 40 mins
+        ///   On call: 180 mins
+        ///   Canadian Holidays: 1440 mins
+        ///   Vacation: 2880 mins
+        ///   Birthdays: 1440 mins
         /// 
         /// Events = homeCalendar.GetCalendarDictionaryByCategoryAndMonth(null, null, true, 9);
         /// 
+        /// /// === Calendar Items by Category and Month ===
+        /// Month: 2020/01
+        /// TotalBusyTime: 2880 mins
+        /// Vacation: 2880 mins
+        /// Month: TOTALS
+        /// Vacation: 2880 mins
+        /// 
         /// Events = homeCalendar.GetCalendarDictionaryByCategoryAndMonth(new DateTime(2025,1,1), new DateTime(2025,12,31), false, 5)
+        /// 
+        /// === Calendar Items by Category and Month ===
+        /// Month: 2020/01
+        ///   TotalBusyTime: 5940 mins
+        ///   Birthdays: 1440 mins
+        ///   Canadian Holidays: 1440 mins
+        ///   On call: 180 mins
+        ///   Vacation: 2880 mins
+        /// Month: TOTALS
+        ///   On call: 180 mins
+        ///   Canadian Holidays: 1440 mins
+        ///   Vacation: 2880 mins
+        ///   Birthdays: 1440 mins
+        /// 
         /// ]]>
         /// </code>
         /// </example>
         /// <param name="Start">The Start Date by YYYY/MM/DD.</param>
         /// <param name="End">The End Date by YYYY/MM/DD</param>
-        /// <param name="FilterFlag">A boolean that filters by category if set to true.</param>
-        /// <param name="CategoryID">An integer that represents an already predefined category</param>
+        /// <param name="FilterFlag">if true filter the Calendar items by category.</param>
+        /// <param name="CategoryID">The Category to be filter by</param>
         /// <returns>Summary</returns>
         public List<Dictionary<string, object>> GetCalendarDictionaryByCategoryAndMonth(DateTime? Start, DateTime? End, bool FilterFlag, int CategoryID)
         {

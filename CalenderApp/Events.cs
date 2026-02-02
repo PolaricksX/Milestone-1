@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Xml;
+using System.Runtime.InteropServices.Marshalling;
 
 // ============================================================================
 // (c) Sandy Bultena 2018
@@ -19,6 +20,17 @@ namespace Calendar
     //        - Read / write to file
     //        - etc
     // ====================================================================
+    
+    /// <summary>
+    /// Stores a group of events stored in a list.
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// <![CDATA[
+    /// Events events = new Events()
+    /// ]]>
+    /// </code>
+    /// </example>
     public class Events
     {
         private static String DefaultFileName = "calendar.txt";
@@ -29,7 +41,21 @@ namespace Calendar
         // ====================================================================
         // Properties
         // ====================================================================
+
+        /// <summary>
+        /// Gets the name of the file
+        /// </summary>
+        /// <value>
+        /// Stores the name of the file
+        /// </value>
         public String FileName { get { return _FileName; } }
+        
+        /// <summary>
+        /// Gets the directory location for the file. 
+        /// </summary>
+        /// <value>
+        /// Stores the directory name
+        /// </value>
         public String DirName { get { return _DirName; } }
 
         // ====================================================================
@@ -38,6 +64,22 @@ namespace Calendar
         // Throws System.IO.FileNotFoundException if file does not exist
         // Throws System.Exception if cannot read the file correctly (parsing XML)
         // ====================================================================
+
+        /// <summary>
+        /// Reads from a file and Uses default filepath if filepath is null
+        /// </summary>
+        /// <param name="filepath">a null filepath</param>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// Events events = new Events()
+        /// 
+        /// 
+        /// nullPath = null
+        /// events.ReadFromFile(nullPath)
+        /// ]]>
+        /// </code>
+        /// </example>
         public void ReadFromFile(String filepath = null)
         {
 
@@ -77,6 +119,20 @@ namespace Calendar
         // save to a file
         // if filepath is not specified, read/save in AppData file
         // ====================================================================
+        /// <summary>
+        /// Saves the file in Appdata if file path is not specified.
+        /// </summary>
+        /// <param name="filepath">a null filepath</param>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// Events events = new Events()
+        /// 
+        /// nullPath = null
+        /// events.SaveToFile(nullPath)
+        /// ]]>
+        /// </code>
+        /// </example>
         public void SaveToFile(String filepath = null)
         {
             // ---------------------------------------------------------------
@@ -115,11 +171,42 @@ namespace Calendar
         // ====================================================================
         // Add Event
         // ====================================================================
+        /// <summary>
+        /// Adds an event to the list
+        /// </summary>
+        /// <param name="exp">the event being added</param>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// Events events = new Events()
+        /// 
+        /// Event event = New Event(1,New DateTime(2026,2,27),90,"Went to the WaterPark",5)
+        /// 
+        /// events.Add(event)
+        /// ]]>
+        /// </code>
+        /// </example>
         private void Add(Event exp)
         {
             _Events.Add(exp);
         }
 
+        /// <summary>
+        /// Creates a new event and add it to the list
+        /// </summary>
+        /// <param name="date">Date when the event occured</param>
+        /// <param name="category">the category of then event</param>
+        /// <param name="duration">the duration of the event</param>
+        /// <param name="details">detail information about the event.</param>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// Events events = new Events()
+        /// 
+        /// events.add(New DateTime(2026,2,27),"Fun",90,Went to the WaterPark")
+        /// ]]>
+        /// </code>
+        /// </example>
         public void Add(DateTime date, int category, Double duration, String details)
         {
             int new_id = 1;
@@ -138,6 +225,10 @@ namespace Calendar
         // ====================================================================
         // Delete Event
         // ====================================================================
+        /// <summary>
+        /// Deletes a event from the list.
+        /// </summary>
+        /// <param name="Id">the index at which the event being deleted at.</param>
         public void Delete(int Id)
         {
             int i = _Events.FindIndex(x => x.Id == Id);
@@ -150,6 +241,20 @@ namespace Calendar
         // Note:  make new copy of list, so user cannot modify what is part of
         //        this instance
         // ====================================================================
+        /// <summary>
+        /// Creates copy of the previous intialize list.
+        /// </summary>
+        /// <returns>returns a copy of the list</returns>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// Events events = new Events()
+        /// Events list = new Events()
+        /// 
+        /// list = events.List()
+        /// ]]>
+        /// </code>
+        /// </example>
         public List<Event> List()
         {
             List<Event> newList = new List<Event>();

@@ -49,24 +49,24 @@ namespace Calendar
         /// <summary>
         /// Represents the types of Category thats can exist  
         /// </summary>
-        /// <summary>
-        /// Event represents just a normal event like going outside
-        /// </summary>
-        /// <summary>
-        /// AllDayEvent represents an event that takes up the entire day
-        /// </summary>
-        /// <summary>
-        /// Holiday represents an event that is a holiday
-        /// </summary>
-        /// <summary>
-        /// Availibility represents when the event is free time.
-        /// </summary>
         public CategoryType Type { get; set; }
         public enum CategoryType
         {
+            /// <summary>
+            /// Event represents just a normal event like going outside
+            /// </summary>
             Event,
+            /// <summary>
+            /// AllDayEvent represents an event that takes up the entire day
+            /// </summary>
             AllDayEvent,
+            /// <summary>
+            /// Holiday represents an event that is a holiday
+            /// </summary>
             Holiday,
+            /// <summary>
+            /// Availibility represents when the event is free time.
+            /// </summary>
             Availability
         };
 

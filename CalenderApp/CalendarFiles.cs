@@ -135,6 +135,15 @@ namespace Calendar
         /// ]]>
         /// </code>
         /// </example>
+        /// <exception cref="Exception">Thrown when the directory does not exist or the file is read-only.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when the provided file path is null.</exception>
+        /// <exception cref="UnauthorizedAccessException">Thrown when the caller does not have the required permission. </exception>
+        /// <exception cref="DirectoryNotFoundException">Thrown when the specified path is invalid. </exception>
+        /// <exception cref="IOException">Thrown when an I/O error occurs. </exception>
+        /// <exception cref="ArgumentException">Thrown when one of the arguments provided to a method is not valid. </exception>
+        /// <exception cref="PathTooLongException">Thrown when the specified path, file name, or both exceed the system-defined maximum length. </exception>
+        /// <exception cref="NotSupportedException">Thrown when the path is in an invalid format. </exception>
+        /// <exception cref="System.Security.SecurityException">Thrown when the caller does not have the required permission. </exception>"
         public static String VerifyWriteToFileName(String? FilePath, String DefaultFileName)
         {
             // ---------------------------------------------------------------
